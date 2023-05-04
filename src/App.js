@@ -1,32 +1,19 @@
-import { useState } from "react";
-import { createContext } from "react";
-import Login from "./components/Login";
-import OTPInput from "./components/OTPInput";
-import Recovered from "./components/Recovered";
-import Reset from "./components/Reset";
-
-export const RecoveryContext = createContext();
+import React from 'react';
+import { BrowserRouter, Route, Routes} from 'react-router-dom';
+import Forgotpassword from './Forgotpassword';
+import Resetpassword from './Resetpassword';
+import Signup from './Signup';
 function App() {
-  const [page, setPage] = useState("login");
-  const [email, setEmail] = useState();
-  const [otp, setOTP] = useState();
-
-  function NavigateComponents() {
-    if (page === "login") return <Login />;
-    if (page === "otp") return <OTPInput />;
-    if (page === "reset") return <Reset />;
-
-    return <Recovered />;
-  }
 
   return (
-    <RecoveryContext.Provider
-      value={{ page, setPage, otp, setOTP, setEmail, email }}
-    >
-      <div className="flex justify-center items-center">
-        <NavigateComponents />
-      </div>
-    </RecoveryContext.Provider>
+    <>
+          <Routes>
+              <Route path="/" element={<Forgotpassword/>} />    
+              <Route path="/Signup" element={<Signup/>} />    
+              <Route path="/Forgotpassword" element={<Forgotpassword/>} />    
+              <Route path="/Resetpassword/:token" element={<Resetpassword/>} />    
+          </Routes>
+    </>
   );
 }
 
